@@ -9,9 +9,6 @@ public class Conexion {
       String  DB_PASSWORD = "123456789";
         try{
             conection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mensajes_app?useSSL=false&serverTimezone=UTC",DB_USER,DB_PASSWORD);
-            if (conection != null) {
-                System.out.println("Conexion exitosa");
-            }
         }
         catch(SQLException error) {
             System.out.println(error);
