@@ -2,6 +2,8 @@ package com.platzimarket.persistance.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "productos") //Este parametro se usa cuando la tabla de la BDD tiene diferente nombre que la clase
 public class Producto { //Por buenas practicas los nombres de los entity van en singular
@@ -19,6 +21,11 @@ public class Producto { //Por buenas practicas los nombres de los entity van en 
     @Column(name = "cantidad_stock")
     private Integer cantidadStock;
     private Boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+    private Categoria categoria;
+
 
     public Integer getIdProducto() {
         return idProducto;
