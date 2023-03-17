@@ -2,6 +2,11 @@ package com.platzimarket.domain;
 
 public class Product {
     private int idProduct;
+
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
+    }
+
     private String name;
     private int idCategory;
     private double price;

@@ -3,6 +3,11 @@ package com.platzimarket.domain;
 public class Category {
     private int idCategory;
     private String description;
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
+    }
+
     private boolean active;
 
     public int getIdCategory() {

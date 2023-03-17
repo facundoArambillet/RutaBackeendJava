@@ -1,18 +1,51 @@
 package com.platzimarket.persistance;
 
+import com.platzimarket.domain.Product;
+import com.platzimarket.domain.repository.ProductRepository;
 import com.platzimarket.persistance.crud.ProductoCrudRepository;
 import com.platzimarket.persistance.entity.Producto;
+import com.platzimarket.persistance.mapper.ProductMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ProductoRepository {
+public class ProductoRepository implements ProductRepository {
+    @Autowired
     private ProductoCrudRepository productoCrudRepository;
+    @Autowired
+    private ProductMapper mapper;
 
-    public List<Producto> getAll() {
-        return (List<Producto>) productoCrudRepository.findAll();
+    @Override
+    public List<Product> getAll() {
+        List<Producto> productos = (List<Producto>) productoCrudRepository.findAll();
+        return mapper.toProducts(productos);
+    }
+
+    @Override
+    public Optional<Product> getById(int idProduct) {
+        return productoCrudRepository.findById(idProduct).map(producto -> mapper.toProduct(producto));
+    }
+
+    @Override
+    public Optional<List<Product>> getByCategory(int idCategory) {
+        List<Producto> productos = productoCrudRepository.findAllByIdCategoria(idCategory);
+        return Optional.of(mapper.toProducts(productos));
+    }
+
+    @Override
+    public String save(Product product) {
+        Producto producto = mapper.toProducto(product);
+        mapper.toProduct(productoCrudRepository.save(producto));
+        return "Product save";
+    }
+
+    @Override
+    public String delete(int idProduct) {
+       productoCrudRepository.deleteById(idProduct);
+        return "Product delete";
     }
 
     public Optional<Producto> getById(Integer idProducto) {
