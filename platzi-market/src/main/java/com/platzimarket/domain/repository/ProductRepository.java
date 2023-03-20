@@ -9,6 +9,6 @@ public interface ProductRepository {
     List<Product> getAll();
     Optional<Product> getById(int idProduct);
     Optional<List<Product>> getByCategory(int idCategory);
-    String save(Product product);
-    String delete(int idProduct);
+    Boolean save(Product product);
+    Boolean delete(int idProduct);
 }

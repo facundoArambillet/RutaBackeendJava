@@ -1,7 +1,9 @@
 package com.platzimarket.domain.service;
 
 import com.platzimarket.domain.Product;
+import com.platzimarket.domain.Purchase;
 import com.platzimarket.domain.repository.ProductRepository;
+import com.platzimarket.domain.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,24 +11,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductService {
+public class PurchaseService {
     @Autowired
-    private ProductRepository productRepository;
+    private PurchaseRepository purchaseRepository;
 
-    public List<Product> getAll() {
-        return productRepository.getAll();
+    public List<Purchase> getAll() {
+        return purchaseRepository.getAll();
     }
 
-    public Optional<Product> getById(int idProduct) {
-            return productRepository.getById(idProduct);
+    public Optional<List<Purchase>> getById(int idCliente) {
+        return purchaseRepository.getByClient(idCliente);
     }
 
-    public Optional<List<Product>> getByCategory(int idCategory) {
-        return productRepository.getByCategory(idCategory);
-    }
-
-    public Boolean save(Product product) {
-        if(productRepository.save(product)) {
+    public Boolean save(Purchase purchase) {
+        if(purchaseRepository.save(purchase)) {
             return true;
         }
         else {
@@ -35,7 +33,7 @@ public class ProductService {
 
     }
 
-    public Boolean delete(int idProduct) {
+/*    public Boolean delete(int idProduct) {
         if(getById(idProduct).isPresent()) {
             productRepository.delete(idProduct);
             return true;
@@ -43,5 +41,5 @@ public class ProductService {
         else {
             return false;
         }
-    }
+    }*/
 }
