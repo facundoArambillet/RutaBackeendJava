@@ -1,5 +1,6 @@
 package com.fundamentosplatzi.springboot.fundamentos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,16 +13,17 @@ public class Post {
 
     private String description;
 
-/*    @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "id_user")
-    private User user;*/
+    @JsonBackReference
+    private User user;
 
     public Post() {
     }
 
     public Post(String description, User user) {
         this.description = description;
-       // this.user = user;
+        this.user = user;
     }
 
     public Long getId() {
@@ -40,20 +42,20 @@ public class Post {
         this.description = description;
     }
 
-/*    public User getUser() {
+    public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
 
     @Override
     public String toString() {
         return "Post{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-               // ", user=" + user +
+                ", user=" + user +
                 '}';
     }
 }

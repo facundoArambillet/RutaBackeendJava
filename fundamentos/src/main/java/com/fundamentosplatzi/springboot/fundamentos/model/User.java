@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,11 +23,9 @@ public class User {
 
     private LocalDate birth;
 
-/*
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<Post> posts;
-*/
+    private List<Post> posts = new ArrayList<>();
 
     public User() {
     }
@@ -70,13 +69,13 @@ public class User {
         this.birth = birth;
     }
 
-/*    public List<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
-    }*/
+    }
 
     @Override
     public String toString() {
