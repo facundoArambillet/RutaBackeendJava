@@ -16,7 +16,6 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    @JsonBackReference
     private User user;
 
     public Post() {

@@ -46,6 +46,12 @@
 			<version>8.0.32</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.6.0</version>
+		</dependency>
+
 		<!--Herramientas para el desarrollo-->
 		<dependency>
 			<groupId>org.springframework</groupId>

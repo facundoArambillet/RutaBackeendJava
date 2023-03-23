@@ -25,7 +25,6 @@ public class User {
     private LocalDate birth;
 
     @OneToMany(mappedBy = "user",cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
-    @JsonBackReference
     private List<Post> posts = new ArrayList<>();
 
     public User() {

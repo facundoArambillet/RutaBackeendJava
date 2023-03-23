@@ -5,6 +5,8 @@ import com.fundamentosplatzi.springboot.fundamentos.model.User;
 import com.fundamentosplatzi.springboot.fundamentos.service.PostService;
 import com.fundamentosplatzi.springboot.fundamentos.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,28 +20,28 @@ public class PostController {
     private PostService postService;
 
     @GetMapping()
-    public List<Post> getAll() {
-        return postService.getAll();
+    public ResponseEntity<List<Post>> getAll() {
+        return new ResponseEntity<>(postService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Optional<Post> getById(@PathVariable("id") long id) {
-        return  postService.getById(id);
+    public ResponseEntity<Optional<Post>> getById(@PathVariable("id") long id) {
+        return  new ResponseEntity<>(postService.getById(id),HttpStatus.OK);
     }
 
     @PostMapping()
-    public Post createPost(@RequestBody Post newPost) {
-        return postService.createPost(newPost);
+    public ResponseEntity<Post> createPost(@RequestBody Post newPost) {
+        return new ResponseEntity<>(postService.createPost(newPost), HttpStatus.OK);
     }
 
     @PutMapping("update/{id}")
-    public Optional<Post> updatePost(@RequestBody Post newPost, @PathVariable long id) {
-        return postService.updatePost(newPost, id);
+    public ResponseEntity<Optional<Post>> updatePost(@RequestBody Post newPost, @PathVariable long id) {
+        return new ResponseEntity<>(postService.updatePost(newPost, id),HttpStatus.OK);
     }
 
     @DeleteMapping("delete/{id}")
-    public Optional<Post> deletePost(@PathVariable long id) {
-        return postService.deletePost(id);
+    public ResponseEntity<Optional<Post>> deletePost(@PathVariable long id) {
+        return new ResponseEntity<>(postService.deletePost(id),HttpStatus.OK);
     }
 
 }
